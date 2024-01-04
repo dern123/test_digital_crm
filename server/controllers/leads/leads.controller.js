@@ -3,12 +3,20 @@ const pool = require("../../db/pool");
 
 module.exports = {
     get: async(req,res) => {
-        await pool.query('SELECT * FROM channel_traffic ORDER BY channel_id ASC', (error, results) => {
-            if (error) {
-                throw error
-            }
-            res.status(200).json(results.rows)
-        })
+        try{
+            await pool.query('SELECT * FROM channel_traffic ' +
+            'JOIN company ON channel_traffic.company_id = company.company_id ' +
+            'JOIN country ON channel_traffic.country_id = country.country_id ' +
+            'ORDER BY channel_traffic.channel_id, company.company_id, country.country_id ASC',
+                (error, results) => {
+                if (error) {
+                    throw error;    
+                }
+                res.status(200).json({status: true, data: results.rows});
+            });
+        } catch (e) {
+
+        }
     },
 
     create: async(req,res) => {
@@ -35,7 +43,7 @@ module.exports = {
             if (error) {
                 throw error
             }
-            res.status(200).json(results.rows)
+            res.status(200).json({status: true, data: results.rows});
         })
     },
       
