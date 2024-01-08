@@ -1,0 +1,13 @@
+<header class="header">
+    <div>
+        <div class="tabs" [style]="'--active-tab:' + tab ">
+            <div class="tab" data-tab-index="0" (click)="clickTab(0)" routerLink="/dashboard"><p >Dashboard</p></div>
+            <div class="tab" data-tab-index="1" (click)="clickTab(1)" routerLink="/statistics"><p >Statistics</p></div>
+            <div class="tab" data-tab-index="2" (click)="clickTab(2)" routerLink="/leads"><p >Leads</p></div>
+            <!-- <div data-tab-index="0" (click)="clickTab(0)"><a class="tab" href="/dashboard">Dashboard</a></div> -->
+            <!-- <div data-tab-index="1" (click)="clickTab(1)"><a class="tab" href="/statistics">Statistics</a></div> -->
+            <!-- <div data-tab-index="2" (click)="clickTab(2)"><a class="tab" href="/leads">Leads</a></div> -->
+            <div class="underline"></div>
+        </div>
+    </div>
+</header>

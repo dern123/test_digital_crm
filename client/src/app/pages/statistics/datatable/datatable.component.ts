@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { StatisticsService } from '../statistics.service';
 import moment from "moment";
 import { ActivatedRoute, Params } from '@angular/router';
@@ -9,28 +9,48 @@ interface Column {
   header: string;
   sort: boolean;
 }
-
+interface Channel {
+  company_id?: string;
+  company_name?: string;
+  leads_count?: number;
+  installs?: number;
+  impressions?: number,
+  ctr?: number;
+  reattrebutions?: number,
+  daus?: number;
+  waus?: number,
+  ecpi?: number;
+  ccr?: number,
+  roas?: number;
+  maus?: number,
+  revenues?: number;
+  spead?: number,
+  events?: number;
+  other?: number,
+}
 @Component({
   selector: 'app-datatable',
   templateUrl: './datatable.component.html',
   styleUrl: './datatable.component.scss'
 })
 export class DatatableComponent implements OnInit {
-  public channels: any;
+  public channels!: Channel[];
   public id: any;
   public cols!: Column[];
+  public selectedColumns!: Column[];
 
   constructor(
     private statisticsService: StatisticsService,
     private route: ActivatedRoute,
+    private cd: ChangeDetectorRef
     ) { }
 
   getAll(){
-
     return this.statisticsService.getAll().subscribe((data: any) => {
       // console.log("data:", data);
       if(data.status){
         this.channels = data.data;
+        this.cd.markForCheck();
       }
     })
   }
@@ -40,11 +60,21 @@ export class DatatableComponent implements OnInit {
       // console.log("data:", data);
       if(data.status){
         this.channels = data.data;
+        this.cd.markForCheck();
       }
     })
   }
 
-
+  search(event:any){
+    if(event.target.value){
+      this.statisticsService.search(event.target.value).subscribe((data: any) => {
+        if(data.status){
+          this.channels = data.data;
+          this.cd.markForCheck();
+        }
+      })
+    }
+  }
   ngOnInit(): void {
     this.route.params.pipe(
       switchMap(
@@ -85,5 +115,6 @@ export class DatatableComponent implements OnInit {
         { field: 'events', header: 'Events', sort: false },
         { field: 'other', header: 'Other', sort: true }
     ];
+    this.selectedColumns = this.cols;
   }
 }

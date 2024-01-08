@@ -68,6 +68,7 @@ dotenv.config();
 
 const connectDb = async () => {
   const client = await pool.connect();
+  
   try{
     const {rows} = await client.query("SELECT current_user");
     const currentUser = rows[0]["current_user"];
@@ -120,26 +121,27 @@ if(process.env.NODE_ENV === 'production'){
   else{
     // require("./server/middlewares/socket.middleware").connect(server, false)
   }
-  
-  function start() {
-      try {
-        connectDb();
-  
-        server.listen(PORT, () => {
-          console.info(`Server started on port: ${PORT}`)
-        });
-        // for(let i = 1; i < 100; i++){
-        //   console.log(`INSERT INTO channel_traffic (country_id, company_id,
-        //       installs, impressions, ctr, reattrebutions, daus, waus,
-        //       ecpi, ccr, roas, maus, revenues, spead, events, other)
-        //       VALUES (${Math.floor(Math.random() * 5)}, ${Math.floor(Math.random() * 12)}, ${Math.floor(Math.random() * 100) + 1}, ${Math.floor(Math.random() * 100) + 1}, ${Math.floor(Math.random() * 1000) / 1000}, ${Math.floor(Math.random() * 100) + 1}, ${Math.floor(Math.random() * 100) + 1}, ${Math.floor(Math.random() * 100) + 1}, ${Math.floor(Math.random() * 100) + 1}, ${Math.floor(Math.random() * 100) + 1}, ${Math.floor(Math.random() * 100) + 1}, ${Math.floor(Math.random() * 100) + 1}, ${Math.floor(Math.random() * 100) + 1}, ${Math.floor(Math.random() * 1000) / 1000}, ${Math.floor(Math.random() * 1000) / 1000}, ${Math.floor(Math.random() * 100) + 1}; `)
-        // }
-  
-      } catch (e) {
-        console.error("SERVER EXIT", e)
-        process.exit(1);
+
+  async function start() {
+    try {
+      connectDb();
+      const {initializeLeadProcessor} = require("./server/process/process")
+      // const leadQueue = 
+      for(let i = 0; i <2; i++){
+        initializeLeadProcessor();
       }
+      // Add 10 test leads to the queue
+        //  leadQueue.add(testLead);
+  
+      server.listen(PORT, () => {
+        console.info(`Server started on port: ${PORT}`);
+      });
+    } catch (e) {
+      console.error('SERVER EXIT', e);
+      process.exit(1);
     }
+  }
+  
   start();
   
   module.exports = app;

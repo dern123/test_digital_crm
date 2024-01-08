@@ -7,6 +7,9 @@ import { DatatableComponent } from './datatable/datatable.component';
 import { TreeModule } from 'primeng/tree';
 import { TableModule  } from 'primeng/table';
 import { ButtonModule  } from 'primeng/button';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { HeaderModule } from '../../components/header/header.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { ButtonModule  } from 'primeng/button';
     StatisticsRoutingModule,
     TreeModule,
     TableModule,
-    ButtonModule 
+    ButtonModule,
+    HeaderModule,
+    MultiSelectModule,
+    FormsModule
   ]
 })
 export class StatisticsModule { }

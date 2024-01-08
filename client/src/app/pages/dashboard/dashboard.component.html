@@ -1,0 +1,23 @@
+<section>
+    <h1>Dashboard</h1>
+    <div class="stats">
+        <h2>Leads</h2>
+        <p-chart type="bar" [data]="firstData" [options]="firstOptions"></p-chart>
+    </div>
+    <div class="stats">
+        <h2>Installs</h2>
+        <p-chart type="pie" [data]="secondData" [options]="secondOptions"></p-chart>
+    </div>
+    <div class="stats">
+        <h2>Reattrebutions & Events</h2>
+        <p-chart type="line" [data]="thirdData" [options]="thirdOptions"></p-chart>
+    </div>
+    <div class="stats">
+        <h2>Waus & Roas</h2>
+        <p-chart type="line" [data]="fourthData" [options]="fourthOptions"></p-chart>
+    </div>
+    <div class="stats">
+        <h2>Spead</h2>
+        <p-chart type="polarArea" [data]="fifthData" [options]="fifthOptions"></p-chart>
+    </div>
+</section>

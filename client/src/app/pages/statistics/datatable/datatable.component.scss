@@ -1,0 +1,23 @@
+.container__page{
+    margin: 50px;
+}
+.container__input{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    & input{
+        padding: 5px;
+        border-radius: 5px;
+        width: 150px;
+        height: 26px;
+        border: 1px solid black;
+        &:focus{
+            border: 1px solid rgba(0, 0, 255, 0.654);
+            outline: rgba(0, 0, 255, 0.654);
+        } 
+        &:hover{
+            border: 1px solid rgba(0, 0, 255, 0.654);
+            outline: rgba(0, 0, 255, 0.654);
+        }  
+    }
+}

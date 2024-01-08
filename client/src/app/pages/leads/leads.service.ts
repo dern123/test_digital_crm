@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-const URL_LEADS = "api/crm/";
+const URL_LEADS = "api/leads/";
 
 @Injectable({
   providedIn: 'root'

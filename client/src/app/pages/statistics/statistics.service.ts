@@ -23,6 +23,14 @@ export class StatisticsService {
     return this.http.get<{status: boolean, data: any}>(URL_STATISTICS + "get", httpOptions)
   }
 
+  getCharts() {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' ,
+    })
+  }
+    return this.http.get<{status: boolean, data: any}>(URL_STATISTICS + "get/chart", httpOptions)
+  }
+
   getById(id: string){
     return this.http.get<{status: boolean, data: any}>(URL_STATISTICS + `get/${id}`);
   }
@@ -32,6 +40,6 @@ export class StatisticsService {
   }
 
   search(data: any){
-    return this.http.post<{status: boolean, data: any}>(URL_STATISTICS + `search`, {code:data});
+    return this.http.post<{status: boolean, data: any}>(URL_STATISTICS + `search/${data}`, {...data});
   }
 }

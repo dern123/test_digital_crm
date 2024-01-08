@@ -7,6 +7,7 @@ import { ListComponent } from './list/list.component';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TreeModule } from 'primeng/tree';
+import { HeaderModule } from '../../components/header/header.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TreeModule } from 'primeng/tree';
     LeadsRoutingModule,
     TreeModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    HeaderModule
   ]
 })
 export class LeadsModule { }
