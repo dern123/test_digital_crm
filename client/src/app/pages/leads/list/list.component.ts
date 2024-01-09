@@ -25,7 +25,7 @@ export class ListComponent implements OnInit{
     })
   }
   ngOnInit(): void {
-      this.getAll()
+      this.getAll();
       this.cols = [
         { field: 'channel_id', header: 'ID', sort: true },
         { field: 'company_name', header: 'Company name', sort: true },
