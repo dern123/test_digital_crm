@@ -9,7 +9,7 @@ import { TableModule  } from 'primeng/table';
 import { ButtonModule  } from 'primeng/button';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { HeaderModule } from '../../components/header/header.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     ButtonModule,
     HeaderModule,
     MultiSelectModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class StatisticsModule { }

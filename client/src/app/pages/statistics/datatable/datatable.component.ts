@@ -3,6 +3,7 @@ import { StatisticsService } from '../statistics.service';
 import moment from "moment";
 import { ActivatedRoute, Params } from '@angular/router';
 import { of, switchMap } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface Column {
   field: string;
@@ -35,10 +36,19 @@ interface Channel {
 })
 export class DatatableComponent implements OnInit {
   public channels!: Channel[];
+  public channelsAll!: Channel[];
+  public companies: any = [];
+  public companiesAll: any = [];
   public id: any;
   public cols!: Column[];
   public selectedColumns!: Column[];
-
+  public countries: any;
+  public formSelectsStat: FormGroup = new FormGroup({
+    country: new FormControl('', Validators.required),
+    days: new FormControl('', Validators.required),
+    companies: new FormControl('', Validators.required),
+    compare: new FormControl('', Validators.required),
+  });
   constructor(
     private statisticsService: StatisticsService,
     private route: ActivatedRoute,
@@ -50,12 +60,12 @@ export class DatatableComponent implements OnInit {
       // console.log("data:", data);
       if(data.status){
         this.channels = data.data;
+        this.channelsAll = data.data.slice();
         this.cd.markForCheck();
       }
     })
   }
   getById(id:any){
-
     return this.statisticsService.getById(id).subscribe((data: any) => {
       // console.log("data:", data);
       if(data.status){
@@ -74,7 +84,50 @@ export class DatatableComponent implements OnInit {
         }
       })
     }
+    else{
+      this.channels = this.channelsAll;
+    }
   }
+
+  getCountries(){
+    this.statisticsService.getCountries().subscribe((data:any) => {
+      if(data.status){
+        this.countries = data.data;
+      }
+    })
+  }
+
+  getCompanies(){
+    this.statisticsService.getCompanies().subscribe((data:any) => {
+      if(data.status){
+        this.companiesAll = data.data;
+        this.companies = data.data;
+      }
+    })
+  }
+
+  checkCountry(event: any){
+    const id = event.target.value;
+    this.companies = [];
+    if(id){
+      this.companies = this.companiesAll.filter((item: any) => id == item.country_id);
+    }
+    else{
+      this.companies = this.companiesAll.slice();
+    }
+  }
+
+  filter(){
+    const data = this.formSelectsStat.value;
+    this.statisticsService.filters(data).subscribe((data:any) => {
+      if(data.status) {
+        this.channels = data.data;
+        console.log("🚀 ~ file: datatable.component.ts:125 ~ DatatableComponent ~ this.statisticsService.filters ~ data.data:", data.data)
+        this.cd.markForCheck();
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.route.params.pipe(
       switchMap(
@@ -87,15 +140,11 @@ export class DatatableComponent implements OnInit {
         })
     ).subscribe((data) => {
     })
-    // this.statisticsService.reload.subscribe((data: any) => {
-    //    if(data){
-    //     this.getAll();
-    //    }
-    // })
     if(!this.id){
       this.getAll();
     }
-
+    this.getCountries();
+    this.getCompanies();
     this.cols = [
         { field: 'company_id', header: 'ID', sort: true },
         { field: 'company_name', header: 'Company name', sort: true },

@@ -1,12 +1,38 @@
+*{
+    box-sizing: border-box;
+}
 .container__page{
     margin: 50px;
+}
+.container__form, .form__box{
+    display: flex;
+    flex-wrap: wrap;
+    transition: all ease-out .4s;
+}
+.container__button{
+    display: flex;
+    align-items: center;
+    button{
+        width: 100px;
+        padding: 6px;
+        margin: 5px;
+        background-color: rgba(252, 66, 255, 0.7);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all ease-out .3s;
+        &:hover{
+            background-color:rgb(251, 35, 255);
+        }
+    }
 }
 .container__input{
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    & input{
+    & input, select{
         padding: 5px;
+        margin: 5px;
         border-radius: 5px;
         width: 150px;
         height: 26px;

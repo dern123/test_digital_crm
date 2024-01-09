@@ -1,15 +1,16 @@
 <section class="container__page">
     <div class="container__form">
-        <form action="">
+        <form class="form__box" [formGroup]="formSelectsStat" (submit)="filter()" action="">
             <div class="container__input">
                 <label for="search">Country</label>
-                <select type="text" name="country" id="country" defaultValue="" (change)="search($event)">
+                <select type="text" name="country" formControlName="country" id="country" defaultValue="" (change)="checkCountry($event)">
                     <option value="" selected>All</option>
+                    <option *ngFor="let country of countries" [value]="country.country_id">{{country.country_name}}</option>
                 </select>  
             </div>
             <div class="container__input">
                 <label for="search">Last days</label>
-                <select type="text" name="days" id="days" defaultValue="" (change)="search($event)">
+                <select type="text" name="days" formControlName="days" id="days" defaultValue="">
                     <option value="" selected>All</option>
                     <option value="7" selected>7 days</option>
                     <option value="30" selected>30 days</option>
@@ -17,22 +18,28 @@
                 </select>  
             </div>
             <div class="container__input">
-                <label for="search">Channels</label>
-                <select type="text" name="channels" id="channels" defaultValue="" (change)="search($event)">
+                <label for="search">Companies</label>
+                <select type="text" name="companies" formControlName="companies" id="companies" defaultValue="">
                     <option value="" selected>All</option>
+                    <option *ngFor="let company of companies" [value]="company.company_id">{{company.company_name}}</option>
                 </select>  
             </div>
             <div class="container__input">
                 <label for="search">Compare to</label>
-                <select type="text" name="compare" id="compare" defaultValue="" (change)="search($event)">
+                <select type="text" name="compare" formControlName="compare" id="compare" defaultValue="">
                     <option value="" selected>All</option>
+                    <option value="1" selected>Country - leads to Channel</option>
+                    <option value="2" selected>Country - channel count leads</option>
                 </select>  
             </div>
-            <div class="container__input">
-                <label for="search">Search</label>
-                <input type="text" name="search" id="search" placeholder="Enter" (keyup)="search($event)">  
+            <div class="container__button">
+                <button type="submit">Filter</button>
             </div>
-        </form>
+        </form>            
+        <div class="container__input">
+            <label for="search">Search</label>
+            <input type="text" name="search" id="search" placeholder="Enter" (keyup)="search($event)">  
+        </div>
     </div>
     <div class="mt-3 " style="margin-bottom: 100px;">
         <p-table
