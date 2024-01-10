@@ -78,48 +78,20 @@ const connectDb = async () => {
   } finally {
       client.release();
   }
-    // try {
-    //     const client = new Client({
-    //         user: process.env.PGUSER,
-    //         host: process.env.PGHOST,
-    //         database: process.env.PGDATABASE,
-    //         password: process.env.PGPASSWORD,
-    //         port: process.env.PGPORT
-    //     })
- 
-    //     await client.connect()
-    //     const res = await client.query('SELECT * FROM some_table')
-    //     console.log(res)
-    //     await client.end()
-    // } catch (error) {
-    //     console.log(error)
-    // }
 }
  
-// connectDb()
 //CRM
 require("./server/routes/crm/index.routes").configure(app);
 
 
-if(process.env.NODE_ENV === 'production'){
-
-
-
-    if(config.get("HOME")){
-      app.use('/', express.static(path.join(__dirname,'public-home')))
-      app.get("/home*", (req, res) => {
-        return res.sendFile(path.resolve(__dirname,'public-home/index.html'))
-      })
-    }
-  
+if(process.env.NODE_ENV === 'production'){  
+  console.log("!!!!!!!!!!!");
     app.use('/', express.static(path.join(__dirname,'public')))
     app.get('*', (req,res) => {
         return res.sendFile(path.resolve(__dirname, 'public/index.html'));
     })
-    // require("./server/middlewares/socket.middleware").connect(server, true)
   }
   else{
-    // require("./server/middlewares/socket.middleware").connect(server, false)
   }
 
   async function start() {

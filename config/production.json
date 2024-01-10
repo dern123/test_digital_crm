@@ -1,14 +1,13 @@
 {
     "JWR_TOKEN": "CrmTestToken",
-    "MainURL": "http://localhost:5000",
-    "PostgresqlUri": "jdbc:postgresql://localhost:5432/testdbcrm",
+    "MainURL": "https://5q5qidayqj.eu-central-1.awsapprunner.com",
     "DB_NAME": "testdbcrm",
-    "PORT": 5000,
+    "PORT": 8080,
     "PathToKeySSHLand": "config/ssh_lend_key.pem",
     "GIT_USER": "dern123",
-    "PGUSER":"postgres",
-    "PGHOST":"jdbc:postgresql://localhost:5432/testdbcrm",
-    "PGPASSWORD":"testdbcrm",
-    "PGDATABASE":"testdbcrm",
-    "PGPORT":"5432"
+    "USER":"kxelfcny",
+    "HOST":"balarama.db.elephantsql.com",
+    "PASSWORD":"XjA4MoTM2ajT3oEJofGTm5o4F_fxAGCz",
+    "DATABASE":"kxelfcny",
+    "DBPORT":"5432"
 }

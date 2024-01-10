@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dern123/test_new_den.git"
+    "url": "git+https://github.com/dern123/test_digital_crm.git"
   },
   "author": "Denis Strizhalov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dern123/test_new_den/issues"
+    "url": "https://github.com/dern123/test_digital_crm/issues"
   },
-  "homepage": "https://github.com/dern123/test_new_den#readme",
+  "homepage": "https://github.com/dern123/test_digital_crm#readme",
   "devDependencies": {
     "cross-env": "^7.0.3"
   },
